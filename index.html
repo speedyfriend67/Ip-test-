@@ -52,7 +52,23 @@ function geo_success(position) {
 function geo_error() {
   console.log('Geolocation failed');
 }
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="getLevelInfo(1)">Get Level Info</button>
+<p id="levelInfo"></p>
 
+<script>
+function getLevelInfo(levelId) {
+  fetch(`https://boomlings.com/database/getGJLevels21.php?gameVersion=21&binaryVersion=35&gdw=0&accountID=0&gjp=0&column=1&value=${levelId}`)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('levelInfo').innerHTML = JSON.stringify(data);
+    });
+}
+</script>
+</body>
+</html>
 var geo_options = {
   enableHighAccuracy: true, 
   maximumAge        : 30000, 
