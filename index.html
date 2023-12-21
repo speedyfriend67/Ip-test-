@@ -1,59 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2048 Game</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #faf8ef;
-    }
-
-    #grid-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      max-width: 450px;
-      margin-bottom: 10px;
-    }
-
-    .grid-cell {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 5px;
-      background-color: #cdc1b4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    #new-game-button {
-      width: 100%;
-      max-width: 450px;
-      padding: 10px;
-      font-size: 18px;
-      background-color: #8f7a66;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+    <title>IPA Dylib Injection</title>
 </head>
 <body>
-  <div id="grid-container"></div>
-  <button id="new-game-button">New Game</button>
-  <script>
-    // JavaScript code remains unchanged
-  </script>
+    <input type="file" id="ipaInput">
+    <input type="file" id="dylibInput">
+    <button onclick="injectDylib()">Inject</button>
+
+    <script>
+        function injectDylib() {
+            var ipaInput = document.getElementById('ipaInput');
+            var ipaFile = ipaInput.files[0];
+            var dylibInput = document.getElementById('dylibInput');
+            var dylibFile = dylibInput.files[0];
+
+            var reader = new FileReader();
+            reader.onload = function() {
+                var ipaArray = new Uint8Array(reader.result);
+
+                var dylibReader = new FileReader();
+                dylibReader.onload = function() {
+                    var dylibArray = new Uint8Array(dylibReader.result);
+
+                    // Find the LC_CODE_SIGNATURE command offset
+                    var codeSignatureOffset = findCodeSignatureOffset(ipaArray);
+
+                    // Unsign the IPA
+                    unsignIPA(ipaArray, codeSignatureOffset);
+
+                    // Inject the dylib
+                    injectDylib(ipaArray, dylibArray, codeSignatureOffset);
+
+                    // Resign the IPA
+                    resignIPA(ipaArray, codeSignatureOffset);
+                };
+                dylibReader.readAsArrayBuffer(dylibFile);
+            };
+            reader.readAsArrayBuffer(ipaFile);
+        }
+
+        function findCodeSignatureOffset(ipaArray) {
+            // Code to find the offset
+        }
+
+        function unsignIPA(ipaArray, codeSignatureOffset) {
+            // Code to remove the code signature
+        }
+
+        function injectDylib(ipaArray, dylibArray, codeSignatureOffset) {
+            // Code to inject the dylib
+        }
+
+        function resignIPA(ipaArray, codeSignatureOffset) {
+            // Code to resign the IPA
+        }
+    </script>
 </body>
 </html>
