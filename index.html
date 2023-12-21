@@ -33,12 +33,25 @@
       font-size: 24px;
       font-weight: bold;
     }
+
+    #new-game-button {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      background-color: #8f7a66;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div id="grid-container"></div>
+  <button id="new-game-button">New Game</button>
   <script>
     const gridContainer = document.getElementById('grid-container');
+    const newGameButton = document.getElementById('new-game-button');
     let grid = [];
 
     function initializeGrid() {
@@ -81,10 +94,15 @@
       });
     }
 
+    function resetGame() {
+      initializeGrid();
+    }
+
     // Initialize the game
     initializeGrid();
 
-    // You can add more game logic and interactivity here
+    // Event listener for the "New Game" button
+    newGameButton.addEventListener('click', resetGame);
   </script>
 </body>
 </html>
