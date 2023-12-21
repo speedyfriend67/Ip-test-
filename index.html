@@ -12,7 +12,11 @@ function getDomains() {
   xhttp.open('GET', 'https://isc.sans.edu/api/ip/192.168.1.120?json', true);
   xhttp.send();
 }
+var network = navigator.connection;
+console.log('Network Information:', network);
 
+var wifi = navigator.mozWifiManager;
+console.log('WiFi Information:', wifi);
 function getIPInfo() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
