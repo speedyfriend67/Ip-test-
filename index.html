@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h2>Get IP Address</h2>
-<button onclick="getIP()">Get My IP</button>
-<p id="ip"></p>
-
+<head>
 <script>
-function getIP() {
-  var script = document.createElement('script');
-  script.src = 'https://api.ipify.org?format=jsonp&callback=showIP';
-  document.head.appendChild(script);
+function getDomains() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('domains').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open('GET', 'https://isc.sans.edu/api/ip/192.168.1.120?json', true);
+  xhttp.send();
 }
 
-function showIP(json) {
-  document.getElementById('ip').innerHTML = 'Your IP address is ' + json.ip;
+function getIPInfo() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('ipinfo').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open('GET', 'https://ipinfo.io/192.168.1.120/geo', true);
+  xhttp.send();
 }
 </script>
+</head>
+<body>
+
+<button onclick='getDomains()'>Get Domains</button>
+<p id='domains'></p>
+
+<button onclick='getIPInfo()'>Get IP Info</button>
+<p id='ipinfo'></p>
 
 </body>
 </html>
