@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Get IP Address</h2>
+<button onclick="getIP()">Get My IP</button>
+<p id="ip"></p>
+
+<script>
+function getIP() {
+  var script = document.createElement('script');
+  script.src = 'https://api.ipify.org?format=jsonp&callback=showIP';
+  document.head.appendChild(script);
+}
+
+function showIP(json) {
+  document.getElementById('ip').innerHTML = 'Your IP address is ' + json.ip;
+}
+</script>
+
+</body>
+</html>
