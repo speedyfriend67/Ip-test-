@@ -1,59 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script>
-function getDomains() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('domains').innerHTML = this.responseText;
-    }
-  };
-  xhttp.open('GET', 'https://isc.sans.edu/api/ip/192.168.1.120?json', true);
-  xhttp.send();
-}
-var network = navigator.connection;
-console.log('Network Information:', network);
-
-var wifi = navigator.mozWifiManager;
-console.log('WiFi Information:', wifi);
-function getIPInfo() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('ipinfo').innerHTML = this.responseText;
-    }
-  };
-  xhttp.open('GET', 'https://ipinfo.io/192.168.1.120/geo', true);
-  xhttp.send();
-}
-  // Get the user's IP address
-var ip = new XMLHttpRequest();
-ip.open('GET', 'https://api.ipify.org?format=json', true);
-ip.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var data = JSON.parse(this.responseText);
-    console.log('User IP address:', data.ip);
-  }
-};
-ip.send();
-
-// Get the user's browser and operating system details
-console.log('User agent:', navigator.userAgent);
-console.log('Browser language:', navigator.language);
-console.log('Browser cookies enabled:', navigator.cookieEnabled);
-
-// Get the user's geolocation
-function geo_success(position) {
-  console.log('User latitude:', position.coords.latitude);
-  console.log('User longitude:', position.coords.longitude);
-}
-
-function geo_error() {
-  console.log('Geolocation failed');
-}
-<!DOCTYPE html>
-<html>
 <body>
 <button onclick="getLevelInfo(1)">Get Level Info</button>
 <p id="levelInfo"></p>
@@ -67,24 +13,5 @@ function getLevelInfo(levelId) {
     });
 }
 </script>
-</body>
-</html>
-var geo_options = {
-  enableHighAccuracy: true, 
-  maximumAge        : 30000, 
-  timeout           : 27000
-};
-
-navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
-</script>
-</head>
-<body>
-
-<button onclick='getDomains()'>Get Domains</button>
-<p id='domains'></p>
-
-<button onclick='getIPInfo()'>Get IP Info</button>
-<p id='ipinfo'></p>
-
 </body>
 </html>
