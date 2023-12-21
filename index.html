@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <body>
-<button onclick="getLevelInfo(1)">Get Level Info</button>
+<button onclick="getLevelInfo()">Get Level Info</button>
 <p id="levelInfo"></p>
 
 <script>
-function getLevelInfo(levelId) {
-  fetch(`https://boomlings.com/database/getGJLevels21.php?gameVersion=21&binaryVersion=35&gdw=0&accountID=0&gjp=0&column=1&value=${levelId}`)
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('levelInfo').innerHTML = JSON.stringify(data);
-    });
+function getLevelInfo() {
+  var levelId = prompt('Enter the level ID:');
+  if (levelId) {
+    fetch(`https://boomlings.com/database/getGJLevels21.php?gameVersion=21&binaryVersion=35&gdw=0&accountID=0&gjp=0&column=1&value=${levelId}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('levelInfo').innerHTML = JSON.stringify(data);
+      });
+  }
 }
 </script>
 </body>
